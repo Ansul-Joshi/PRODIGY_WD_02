@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: lightblue;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius:100%;
+            border: solid black 2px;
+        }
+        span {
+            font-size: 30px;
+        }
+        button {
+            margin-left:10px;
+            border: solid black 2px;
+            background-color: beige;
+            width: 50px;
+            height: 50px;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <p> <span id="hr">00</span> Hr  <span id="min">00</span> min  <span id="sec">00</span> sec  <span id="millisec">00</span> millisec</p>
+        <div>
+            <button onclick="start()">Start</button>
+            <button onclick="stop()">Stop</button>
+            <button onclick="reset()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let hr=0;
+        let min =0;
+        let sec=0;
+        let millisec=0;
+        let timer=false;
+        function start(){
+            timer=true;
+            stopWatch();
+        }
+        function stop(){
+            timer=false;
+        }
+        function reset(){
+            timer=false;
+            hr=0;
+            min=0;
+            sec=0;
+            millisec=0;
+            document.getElementById('hr').innerHTML='00';
+            document.getElementById('min').innerHTML='00';
+            document.getElementById('sec').innerHTML='00';
+            document.getElementById('millisec').innerHTML='00';
+        }
+        function stopWatch() {
+        if(timer){
+            millisec ++;
+            if(millisec==100){
+                millisec=0;
+                sec++;
+            }
+            if(sec==60){
+                sec=0;
+                min++;
+            }
+            if(min==60){
+                min=0;
+                hr++
+            }
+            hrs=hr;
+            mins=min;
+            secs=sec;
+            millisecs=millisec;
+            if(hr<10){
+                hrs="0"+hrs;
+            }
+            if(mins<10){
+                mins="0"+mins;
+            }
+            if(secs<10){
+                secs="0"+secs;
+            }
+            if(millisecs<10){
+                millisecs="0"+millisecs;
+            }
+            document.getElementById('hr').innerHTML=hrs;
+            document.getElementById('min').innerHTML=mins;
+            document.getElementById('sec').innerHTML=secs;
+            document.getElementById('millisec').innerHTML=millisecs;
+            setTimeout(stopWatch, 10);
+        }
+        }
+    </script>
+</body>
+</html>
